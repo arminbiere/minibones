@@ -1,0 +1,61 @@
+#!/bin/sh
+
+
+usage () {
+cat <<EOF
+usage: configure [-h|--help][-g|--debug][-e|--expert]
+
+-h | --help    print this command line option summary
+-g | --debug   compile with assertion checking and symbols
+-e | --expert  compile in expert mode
+EOF
+}
+
+msg () {
+  echo "[configure] $*"
+}
+
+die () {
+  echo "configure: error: $*" 1>&2
+  exit 1
+}
+
+debug=no
+expert=no
+
+while [ $# -gt 0 ]
+do
+  case $1 in
+    -h|--help) usage; exit 0;;
+    -g|--debug) debug=yes;;
+    -e|--expect) expert=yes;;
+    *) die "invalid option '$1' (try '-h')";;
+  esac
+  shift
+done
+
+[ x"$CXX" = x ] && CXX=g++
+
+CXXFLAGS="-Wall"
+
+if [ $expert = yes ]
+then
+  msg "compiling code in expert mode with run-time options"
+else
+  msg "compiling without support for run-time options"
+  msg "(use '--expert' to include run-time options)"
+fi
+
+if [ $debug = yes ]
+then
+  CXXFLAGS="$CXXFLAGS -ggdb3"
+else
+  CXXFLAGS="$CXXFLAGS -O3 -DNDEBUG"
+fi
+
+[ $expert = yes ] && CXXFLAGS="$CXXFLAGS -DEXPERT"
+
+COMPILE="$CXX $CXXFLAGS"
+
+msg "compiling with '$COMPILE'"
+sed -e "s#@COMPILE@#$COMPILE#" makefile.in > makefile
