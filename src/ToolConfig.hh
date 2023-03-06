@@ -179,7 +179,7 @@ public:
 protected:
 
   void set_run_mode(bool en_mode, bool it_mode) {
-    assert(en_mode && !it_mode || !en_mode && it_mode);
+    assert((en_mode && !it_mode) || (!en_mode && it_mode));
     _enum_mode = en_mode; _iter_mode = it_mode;
   }
 

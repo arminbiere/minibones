@@ -3,7 +3,7 @@
 # You need 'find', 'sed' and 'xargs' installed.  It relies on 'ccache' or
 # something similar for fast recompilation of individual object files.
 
-COMPILE=g++ -Wall -O3 -DNDEBUG
+COMPILE=g++ -Wall -ggdb3 -DEXPERT
 
 # The maximum number of parallel processes used for compilation.
 # Lower it if (with minimum 1) in case compilation needs to much memory.
