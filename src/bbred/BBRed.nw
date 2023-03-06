@@ -271,7 +271,7 @@ void BBRed::run() {
    assumptions.clear();
    build_assumptions(to_test, assumptions);
    const bool isbb = !solver.solve(assumptions);
-   if (isbb) handle_backbone(might_be, must_be, to_test, solver.conflict);
+   if (isbb) handle_backbone(might_be, must_be, to_test, solver.conflict.toVec ());
    else prune_might_be(might_be,solver.model,to_test);
  }
  std::cerr<<"BB count: "<<bbcount<<std::endl;
