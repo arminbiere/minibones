@@ -7,7 +7,17 @@ thus I added a `configure` script which generates `makefile` from
 make`.  You might want to consider checking out `./configure -h` and
 particularly the '--expert' option to allow run-time options for.
 
-Our new build process requires 'sed', 'find' and 'xargs' and the result of
-compilation is `minbones` and `make clean` will clean up generated files.
+Beside `notangle` and `libz` which was already needed for the old build
+process our new build process also requires `sed`, `find` and `xargs`.
+
+On Ubuntu you can for instance install the following packages to meet
+this build depedencies:
+
+```
+sudo apt install noweb zlib1g sed findutils
+```
+
+The result of compilation is `minibones` and `make clean` will clean up
+generated files.
 
 Armin Biere, March 2023
