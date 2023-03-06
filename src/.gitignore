@@ -1,3 +1,5 @@
+# Ignore makefile generated from makefile.in
+makefile
 # Ignore autosafe/backup/temporary files 
 *.hh~
 *.cc~
