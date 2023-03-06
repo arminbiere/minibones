@@ -5,7 +5,7 @@ thus I added a `configure` script which generates `makefile` from
 `makefile.in`.  Lower-case `makefile` has higher priority than upper-case
 `Makefile` and thus for pain-less compilation simply use `./configure &&
 make`.  You might want to consider checking out `./configure -h` and
-particularly the '--expert' option to allow run-time options for.
+particularly the `--expert` option to allow run-time options for.
 
 Beside `notangle` and `libz` which was already needed for the old build
 process our new build process also requires `sed`, `find` and `xargs`.
