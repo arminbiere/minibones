@@ -122,15 +122,16 @@ int run_upper_bound(ToolConfig& config, ostream& output) {
   pupperbound = new UpperBound(config,output, reader.get_max_id(), reader.get_clause_vector());
   UpperBound& upperbound=*pupperbound;
   if (!upperbound.initialize()) {//unsatisfiable
-    config.prefix(output) << "instance unsatisfiable" << endl;
+    config.prefix(output) << "c instance unsatisfiable" << endl;
     output << "s 0" << endl;
     delete pupperbound; 
     return 20;
   }
+  config.prefix(output) << "c instance satisfiable" << endl << flush;
   instance_sat = true;
   //run upperbound
   upperbound.run();
-  config.prefix(output) << "computation completed " << endl;
+  config.prefix(output) << "c computation completed " << endl;
   cout << "i sc:" << upperbound.get_solver_calls() << endl;
   cout << "i st:" << upperbound.get_solver_time() << endl;
   cout << "i ast:" << setprecision(2) << (upperbound.get_solver_time()/(double)upperbound.get_solver_calls()) << endl;
@@ -159,12 +160,13 @@ int run_core_based(ToolConfig& config, ostream& output) {
   pcorebased = new CoreBased(config, output, reader.get_max_id(), reader.get_clause_vector());
   CoreBased& corebased=*pcorebased;
   if (!corebased.initialize()) {//unsatisfiable
-    config.prefix(output) << "instance unsatisfiable" << endl;
+    config.prefix(output) << "c instance unsatisfiable" << endl;
     output << "s 0" << endl;
     delete pcorebased; 
     return 20;
   }
   instance_sat = true;
+  config.prefix(output) << "c instance satisfiable" << endl << flush;
   //run corebased
   cout << "c CoreBased algorithm, chunk: " << config.get_chunk_size()  << endl;
   corebased.run();
